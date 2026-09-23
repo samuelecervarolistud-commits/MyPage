@@ -1,609 +1,372 @@
 <!DOCTYPE html>
-<html lang="it" class="scroll-smooth">
+<html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Personale | Presentazione</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        /* Custom subtle scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: rgba(0,0,0,0.05);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(14, 165, 233, 0.4);
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(14, 165, 233, 0.7);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pera — personal portfolio, idee, tecnologia, psicologia e musica." />
+  <title>Pera.exe — Personal Identity</title>
+  <style>
+    :root {
+      --bg: #09090b;
+      --panel: #111116;
+      --panel-2: #17171f;
+      --text: #f4f4f5;
+      --muted: #a1a1aa;
+      --line: rgba(255,255,255,.10);
+      --accent: #a78bfa;
+      --accent-2: #67e8f9;
+      --success: #86efac;
+      --radius: 24px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background:
+        radial-gradient(circle at 15% 10%, rgba(167,139,250,.15), transparent 30%),
+        radial-gradient(circle at 90% 25%, rgba(103,232,249,.10), transparent 28%),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+    .muted { color: var(--muted); }
+    .accent { color: var(--accent); }
+    .mono { font-family: "SFMono-Regular", Consolas, monospace; }
+
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(9,9,11,.78);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner {
+      min-height: 74px; display: flex; align-items: center;
+      justify-content: space-between; gap: 24px;
+    }
+    .logo { font-weight: 800; letter-spacing: -.05em; font-size: 1.2rem; }
+    .logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .nav-links a { color: var(--muted); font-size: .92rem; transition: color .2s; }
+    .nav-links a:hover { color: var(--text); }
+
+    .hero { padding: 115px 0 90px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 7px 12px; border: 1px solid var(--line);
+      border-radius: 999px; background: rgba(255,255,255,.035);
+      color: var(--muted); font-size: .82rem; margin-bottom: 25px;
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); box-shadow: 0 0 15px var(--success); }
+    h1 {
+      max-width: 900px; font-size: clamp(3.2rem, 8vw, 7.5rem);
+      line-height: .98; letter-spacing: -.085em; font-weight: 850;
+    }
+    .gradient {
+      background: linear-gradient(100deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hero-description { max-width: 680px; margin-top: 28px; color: var(--muted); font-size: 1.15rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center;
+      border: 1px solid var(--line); border-radius: 999px;
+      padding: 12px 18px; font-weight: 700; font-size: .92rem;
+      background: var(--panel); transition: transform .2s, border-color .2s;
+    }
+    .button:hover { transform: translateY(-2px); border-color: var(--accent); }
+    .button.primary { background: var(--text); color: var(--bg); border-color: var(--text); }
+
+    section { padding: 75px 0; }
+    .section-heading { display: flex; justify-content: space-between; gap: 30px; align-items: end; margin-bottom: 28px; }
+    .section-heading h2 { font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: -.06em; line-height: 1; }
+    .section-heading p { max-width: 430px; color: var(--muted); font-size: .95rem; }
+
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+    .card {
+      grid-column: span 4; background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
+      border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 26px; overflow: hidden; position: relative;
+    }
+    .card.wide { grid-column: span 8; }
+    .card.full { grid-column: 1 / -1; }
+    .card h3 { font-size: 1.25rem; margin: 12px 0 9px; letter-spacing: -.03em; }
+    .card p { color: var(--muted); font-size: .95rem; }
+    .card-icon { font-size: 1.7rem; }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .tag {
+      border: 1px solid var(--line); border-radius: 999px;
+      padding: 5px 10px; color: #d4d4d8; font-size: .78rem;
+      background: rgba(255,255,255,.025);
+    }
+
+    .quote {
+      font-size: clamp(1.45rem, 3vw, 2.5rem);
+      letter-spacing: -.04em; line-height: 1.2; font-weight: 750;
+    }
+    .quote small { display: block; margin-top: 20px; font-size: .85rem; color: var(--muted); font-weight: 400; letter-spacing: 0; }
+
+    .timeline { display: grid; gap: 14px; }
+    .timeline-item { display: grid; grid-template-columns: 130px 1fr; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--line); }
+    .timeline-item:last-child { border-bottom: 0; }
+    .timeline-year { color: var(--accent); font-family: monospace; font-size: .85rem; }
+    .timeline-item h3 { margin-bottom: 4px; }
+
+    .terminal {
+      background: #070709; border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 24px;
+      box-shadow: 0 20px 80px rgba(0,0,0,.25);
+    }
+    .terminal-bar { display: flex; gap: 7px; margin-bottom: 22px; }
+    .terminal-bar span { width: 11px; height: 11px; border-radius: 50%; background: #52525b; }
+    pre { white-space: pre-wrap; color: #d4d4d8; font: .9rem/1.8 "SFMono-Regular", Consolas, monospace; }
+    .prompt { color: var(--success); }
+
+    .footer { padding: 35px 0 50px; border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+
+    @media (max-width: 850px) {
+      .card, .card.wide { grid-column: span 6; }
+      .section-heading { flex-direction: column; align-items: start; }
+    }
+    @media (max-width: 600px) {
+      .container { width: min(var(--max), calc(100% - 28px)); }
+      .nav-inner { align-items: start; flex-direction: column; padding: 16px 0; }
+      .hero { padding: 75px 0 50px; }
+      .card, .card.wide { grid-column: 1 / -1; }
+      .timeline-item { grid-template-columns: 1fr; gap: 4px; }
+      section { padding: 50px 0; }
+    }
+  </style>
 </head>
-<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300">
+<body>
+  <nav>
+    <div class="container nav-inner">
+      <a class="logo" href="#top">pera<span>.exe</span></a>
+      <div class="nav-links">
+        <a href="#profilo">Profilo</a>
+        <a href="#interessi">Interessi</a>
+        <a href="#progetti">Progetti</a>
+        <a href="#direzione">Direzione</a>
+      </div>
+    </div>
+  </nav>
 
-    <header class="fixed top-0 left-0 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-50 border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <!-- Logo / Nome -->
-            <a href="#" class="text-xl font-bold bg-gradient-to-r from-sky-500 to-indigo-600 bg-clip-text text-transparent flex items-center gap-2">
-                <i data-lucide="code" class="w-6 h-6 text-sky-500"></i>
-                <span>IlMioPortfolio</span>
-            </a>
-
-            <!-- Navigazione Desktop -->
-            <nav class="hidden md:flex items-center space-x-8">
-                <a href="#about" class="text-sm font-medium hover:text-sky-500 transition-colors">Chi Sono</a>
-                <a href="#skills" class="text-sm font-medium hover:text-sky-500 transition-colors">Competenze</a>
-                <a href="#projects" class="text-sm font-medium hover:text-sky-500 transition-colors">Progetti</a>
-                <a href="#experience" class="text-sm font-medium hover:text-sky-500 transition-colors">Esperienza</a>
-                <a href="#contact" class="text-sm font-medium hover:text-sky-500 transition-colors">Contatti</a>
-            </nav>
-
-            <!-- Toggle Tema & Bottone Menu Mobile -->
-            <div class="flex items-center gap-4">
-                <button id="themeToggle" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-300" title="Cambia tema">
-                    <i data-lucide="sun" id="sunIcon" class="w-5 h-5 hidden"></i>
-                    <i data-lucide="moon" id="moonIcon" class="w-5 h-5"></i>
-                </button>
-
-                <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
-                    <i data-lucide="menu" class="w-6 h-6"></i>
-                </button>
-            </div>
+  <main id="top">
+    <section class="hero">
+      <div class="container">
+        <div class="eyebrow"><span class="dot"></span> In costruzione, ma operativo</div>
+        <h1>Non voglio solo<br />usare il mondo.<br /><span class="gradient">Voglio capirlo.</span></h1>
+        <p class="hero-description">
+          Sono Pera: uno studente con una mente orientata alla tecnologia, alla psicologia
+          e alla creatività. Mi interessa capire come funzionano le cose, smontarle,
+          ricostruirle e trovare connessioni che prima non vedevo.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#profilo">Conosciamoci ↓</a>
+          <a class="button" href="#progetti">Esplora i progetti</a>
         </div>
+      </div>
+    </section>
 
-        <!-- Menu Mobile Dropdown -->
-        <div id="mobileMenu" class="hidden md:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 pt-2 pb-4 space-y-3">
-            <a href="#about" class="block py-2 text-base font-medium hover:text-sky-500">Chi Sono</a>
-            <a href="#skills" class="block py-2 text-base font-medium hover:text-sky-500">Competenze</a>
-            <a href="#projects" class="block py-2 text-base font-medium hover:text-sky-500">Progetti</a>
-            <a href="#experience" class="block py-2 text-base font-medium hover:text-sky-500">Esperienza</a>
-            <a href="#contact" class="block py-2 text-base font-medium hover:text-sky-500">Contatti</a>
+    <section id="profilo">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Il profilo</h2>
+          <p>Una descrizione sintetica del modo in cui affronto interessi, problemi e obiettivi.</p>
         </div>
-    </header>
-
-    <main class="pt-16">
-        <section id="hero" class="min-h-[calc(100vh-4rem)] flex items-center justify-center relative overflow-hidden py-12">
-            <!-- Sfondo decorativo sfumato -->
-            <div class="absolute -top-40 -right-40 w-80 h-80 bg-sky-400/20 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
-
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col md:flex-row items-center justify-between gap-12">
-                <!-- Testo Intro -->
-                <div class="flex-1 text-center md:text-left">
-                    <span class="inline-block py-1 px-3 rounded-full bg-sky-100 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 text-sm font-semibold mb-4 tracking-wide border border-sky-200 dark:border-sky-800">
-                        👋 Benvenuto nel mio profilo
-                    </span>
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4">
-                        Ciao, sono <span class="bg-gradient-to-r from-sky-500 to-indigo-600 bg-clip-text text-transparent">Mario Rossi</span>
-                    </h1>
-                    <p class="text-xl sm:text-2xl font-medium text-slate-600 dark:text-slate-300 mb-6">
-                        Sviluppatore Full-Stack & UI/UX Designer
-                    </p>
-                    <p class="text-slate-600 dark:text-slate-400 text-base sm:text-lg mb-8 max-w-xl leading-relaxed">
-                        Appassionato nell'ideare e realizzare soluzioni digitali moderne, funzionali ed esteticamente curate. Trasformo le idee in esperienze web coinvolgenti.
-                    </p>
-
-                    <!-- Bottoni di Azione -->
-                    <div class="flex flex-wrap items-center justify-center md:justify-start gap-4">
-                        <a href="#contact" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-medium shadow-lg shadow-sky-500/25 transition-all duration-200 transform hover:-translate-y-0.5">
-                            <i data-lucide="mail" class="w-4 h-4"></i>
-                            <span>Contattami</span>
-                        </a>
-                        <a href="#projects" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 font-medium transition-all duration-200">
-                            <i data-lucide="folder-git-2" class="w-4 h-4"></i>
-                            <span>Vedi Progetti</span>
-                        </a>
-                    </div>
-
-                    <!-- Social Fast Links -->
-                    <div class="mt-8 flex items-center justify-center md:justify-start gap-4 text-slate-500 dark:text-slate-400">
-                        <a href="#" class="p-2 rounded-lg hover:text-sky-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="GitHub">
-                            <i data-lucide="github" class="w-5 h-5"></i>
-                        </a>
-                        <a href="#" class="p-2 rounded-lg hover:text-sky-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="LinkedIn">
-                            <i data-lucide="linkedin" class="w-5 h-5"></i>
-                        </a>
-                        <a href="#" class="p-2 rounded-lg hover:text-sky-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Twitter">
-                            <i data-lucide="twitter" class="w-5 h-5"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Foto Profilo con Effetto Frame -->
-                <div class="relative flex-shrink-0">
-                    <div class="w-64 h-64 sm:w-80 sm:h-80 rounded-3xl bg-gradient-to-tr from-sky-500 to-indigo-600 p-1.5 shadow-2xl transform hover:rotate-1 transition-transform duration-300">
-                        <div class="w-full h-full rounded-[22px] overflow-hidden bg-slate-100 dark:bg-slate-800 relative">
-                            <img src="https://placehold.co/400x400/0ea5e9/ffffff?text=La+Tua+Foto" alt="Foto Profilo Mario Rossi" class="w-full h-full object-cover">
-                        </div>
-                    </div>
-                    <!-- Badge di stato -->
-                    <div class="absolute -bottom-4 right-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 py-2 rounded-2xl shadow-lg flex items-center gap-2">
-                        <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
-                        <span class="text-xs font-semibold">Disponibile per progetti</span>
-                    </div>
-                </div>
+        <div class="grid">
+          <article class="card wide">
+            <div class="card-icon">🧠</div>
+            <h3>Curiosità prima di tutto</h3>
+            <p>
+              Non mi basta conoscere una risposta: voglio comprendere il meccanismo che
+              la produce. Mi attraggono i problemi complessi, il ragionamento per ipotesi
+              e l'idea di trasformare una domanda confusa in un modello più chiaro.
+            </p>
+            <div class="tag-list">
+              <span class="tag">Analisi</span><span class="tag">Ipotesi</span>
+              <span class="tag">Problem solving</span><span class="tag">Ricerca</span>
             </div>
-        </section>
-
-        <section id="about" class="py-20 bg-white dark:bg-slate-800/50 border-y border-slate-200/80 dark:border-slate-800">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-2xl mx-auto mb-16">
-                    <h2 class="text-3xl font-bold tracking-tight mb-4">Chi Sono</h2>
-                    <p class="text-slate-600 dark:text-slate-400">Scopri qualcosa in più sul mio percorso, sulle mie passioni e su come lavoro.</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Box 1 -->
-                    <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/60 shadow-sm hover:shadow-md transition-shadow">
-                        <div class="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-500 flex items-center justify-center mb-4">
-                            <i data-lucide="code-2" class="w-6 h-6"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2">Sviluppo Web</h3>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-                            Amo creare web app veloci, accessibili e responsive utilizzando le ultime tecnologie front-end e back-end.
-                        </p>
-                    </div>
-
-                    <!-- Box 2 -->
-                    <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/60 shadow-sm hover:shadow-md transition-shadow">
-                        <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-500 flex items-center justify-center mb-4">
-                            <i data-lucide="palette" class="w-6 h-6"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2">UI/UX Design</h3>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-                            Progetto interfacce pulite ed intuitive focalizzandomi sull'esperienza dell'utente e sulla cura del dettaglio visuale.
-                        </p>
-                    </div>
-
-                    <!-- Box 3 -->
-                    <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/60 shadow-sm hover:shadow-md transition-shadow">
-                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center mb-4">
-                            <i data-lucide="rocket" class="w-6 h-6"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2">Problem Solving</h3>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-                            Affronto le sfide complesse dividendo i problemi e trovando soluzioni scalabili ed efficienti per i progetti.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Breve Bio Dettagliata -->
-                <div class="mt-12 p-8 rounded-2xl bg-gradient-to-r from-sky-500/5 to-indigo-500/5 border border-sky-500/10 text-slate-700 dark:text-slate-300">
-                    <p class="leading-relaxed text-base sm:text-lg">
-                        Con oltre <strong>5 anni di esperienza</strong> nel settore del digitale, ho lavorato con startup, agenzie e clienti freelance per trasformare idee in prodotti pronti al mercato. Quando non sto scrivendo codice, mi piace esplorare nuove tecnologie, contribuire a progetti open source e tenermi aggiornato sulle tendenze di design web.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section id="skills" class="py-20">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-2xl mx-auto mb-16">
-                    <h2 class="text-3xl font-bold tracking-tight mb-4">Le Mie Competenze</h2>
-                    <p class="text-slate-600 dark:text-slate-400">Gli strumenti, i linguaggi e i framework con cui lavoro quotidianamente.</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Front-end Skills -->
-                    <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
-                        <h3 class="text-lg font-bold mb-6 flex items-center gap-2">
-                            <i data-lucide="layout" class="w-5 h-5 text-sky-500"></i>
-                            Frontend Development
-                        </h3>
-                        <div class="space-y-4">
-                            <div>
-                                <div class="flex justify-between mb-1 text-sm font-medium">
-                                    <span>HTML5 / CSS3 / Tailwind CSS</span>
-                                    <span class="text-sky-500">95%</span>
-                                </div>
-                                <div class="w-full bg-slate-200 dark:bg-slate-700 h-2.5 rounded-full overflow-hidden">
-                                    <div class="bg-sky-500 h-2.5 rounded-full" style="width: 95%"></div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="flex justify-between mb-1 text-sm font-medium">
-                                    <span>JavaScript (ES6+) / TypeScript</span>
-                                    <span class="text-sky-500">90%</span>
-                                </div>
-                                <div class="w-full bg-slate-200 dark:bg-slate-700 h-2.5 rounded-full overflow-hidden">
-                                    <div class="bg-sky-500 h-2.5 rounded-full" style="width: 90%"></div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="flex justify-between mb-1 text-sm font-medium">
-                                    <span>React.js / Next.js</span>
-                                    <span class="text-sky-500">85%</span>
-                                </div>
-                                <div class="w-full bg-slate-200 dark:bg-slate-700 h-2.5 rounded-full overflow-hidden">
-                                    <div class="bg-sky-500 h-2.5 rounded-full" style="width: 85%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Back-end & Tools Skills -->
-                    <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
-                        <h3 class="text-lg font-bold mb-6 flex items-center gap-2">
-                            <i data-lucide="server" class="w-5 h-5 text-indigo-500"></i>
-                            Backend & Strumenti
-                        </h3>
-                        <div class="space-y-4">
-                            <div>
-                                <div class="flex justify-between mb-1 text-sm font-medium">
-                                    <span>Node.js / Express</span>
-                                    <span class="text-indigo-500">80%</span>
-                                </div>
-                                <div class="w-full bg-slate-200 dark:bg-slate-700 h-2.5 rounded-full overflow-hidden">
-                                    <div class="bg-indigo-500 h-2.5 rounded-full" style="width: 80%"></div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="flex justify-between mb-1 text-sm font-medium">
-                                    <span>Database (PostgreSQL / MongoDB)</span>
-                                    <span class="text-indigo-500">75%</span>
-                                </div>
-                                <div class="w-full bg-slate-200 dark:bg-slate-700 h-2.5 rounded-full overflow-hidden">
-                                    <div class="bg-indigo-500 h-2.5 rounded-full" style="width: 75%"></div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="flex justify-between mb-1 text-sm font-medium">
-                                    <span>Git / GitHub / Figma</span>
-                                    <span class="text-indigo-500">90%</span>
-                                </div>
-                                <div class="w-full bg-slate-200 dark:bg-slate-700 h-2.5 rounded-full overflow-hidden">
-                                    <div class="bg-indigo-500 h-2.5 rounded-full" style="width: 90%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Skill Tags Grid -->
-                <div class="mt-8 flex flex-wrap justify-center gap-3">
-                    <span class="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">REST API</span>
-                    <span class="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">GraphQL</span>
-                    <span class="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">Docker</span>
-                    <span class="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">SEO Strategy</span>
-                    <span class="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">UI Animation</span>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects" class="py-20 bg-white dark:bg-slate-800/50 border-y border-slate-200/80 dark:border-slate-800">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-2xl mx-auto mb-16">
-                    <h2 class="text-3xl font-bold tracking-tight mb-4">Progetti In Evidenza</h2>
-                    <p class="text-slate-600 dark:text-slate-400">Una selezione dei miei lavori più recenti e significativi.</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Progetto 1 -->
-                    <div class="group bg-slate-50 dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col">
-                        <div class="relative overflow-hidden aspect-video">
-                            <img src="https://placehold.co/600x400/0284c7/ffffff?text=E-Commerce+App" alt="E-commerce App" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                        </div>
-                        <div class="p-6 flex-1 flex flex-col justify-between">
-                            <div>
-                                <div class="flex gap-2 mb-3">
-                                    <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-sky-100 dark:bg-sky-900/50 text-sky-600 dark:text-sky-400">React</span>
-                                    <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400">Node.js</span>
-                                </div>
-                                <h3 class="text-xl font-bold mb-2 group-hover:text-sky-500 transition-colors">Piattaforma E-Commerce</h3>
-                                <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">
-                                    Negozio online completo con carrello in tempo reale, gestione pagamenti via Stripe e dashboard amministratore.
-                                </p>
-                            </div>
-                            <div class="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-700">
-                                <a href="#" class="inline-flex items-center gap-1 text-sm font-semibold text-sky-500 hover:text-sky-600">
-                                    <span>Live Demo</span>
-                                    <i data-lucide="external-link" class="w-4 h-4"></i>
-                                </a>
-                                <a href="#" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
-                                    <i data-lucide="github" class="w-5 h-5"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Progetto 2 -->
-                    <div class="group bg-slate-50 dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col">
-                        <div class="relative overflow-hidden aspect-video">
-                            <img src="https://placehold.co/600x400/6366f1/ffffff?text=Task+Manager" alt="Task Manager" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                        </div>
-                        <div class="p-6 flex-1 flex flex-col justify-between">
-                            <div>
-                                <div class="flex gap-2 mb-3">
-                                    <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-sky-100 dark:bg-sky-900/50 text-sky-600 dark:text-sky-400">Vue.js</span>
-                                    <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400">Firebase</span>
-                                </div>
-                                <h3 class="text-xl font-bold mb-2 group-hover:text-sky-500 transition-colors">Task Manager App</h3>
-                                <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">
-                                    Applicazione per la gestione della produttività personale con Kanban board interattivo e sync multi-dispositivo.
-                                </p>
-                            </div>
-                            <div class="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-700">
-                                <a href="#" class="inline-flex items-center gap-1 text-sm font-semibold text-sky-500 hover:text-sky-600">
-                                    <span>Live Demo</span>
-                                    <i data-lucide="external-link" class="w-4 h-4"></i>
-                                </a>
-                                <a href="#" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
-                                    <i data-lucide="github" class="w-5 h-5"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Progetto 3 -->
-                    <div class="group bg-slate-50 dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col">
-                        <div class="relative overflow-hidden aspect-video">
-                            <img src="https://placehold.co/600x400/0f766e/ffffff?text=AI+Dashboard" alt="AI Dashboard" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                        </div>
-                        <div class="p-6 flex-1 flex flex-col justify-between">
-                            <div>
-                                <div class="flex gap-2 mb-3">
-                                    <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-sky-100 dark:bg-sky-900/50 text-sky-600 dark:text-sky-400">Next.js</span>
-                                    <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-400">Tailwind</span>
-                                </div>
-                                <h3 class="text-xl font-bold mb-2 group-hover:text-sky-500 transition-colors">Dashboard Analytics AI</h3>
-                                <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">
-                                    Pannello di controllo per il tracciamento dei dati aziendali con grafici interattivi e generazione di report via IA.
-                                </p>
-                            </div>
-                            <div class="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-700">
-                                <a href="#" class="inline-flex items-center gap-1 text-sm font-semibold text-sky-500 hover:text-sky-600">
-                                    <span>Live Demo</span>
-                                    <i data-lucide="external-link" class="w-4 h-4"></i>
-                                </a>
-                                <a href="#" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
-                                    <i data-lucide="github" class="w-5 h-5"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="experience" class="py-20">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-2xl mx-auto mb-16">
-                    <h2 class="text-3xl font-bold tracking-tight mb-4">Esperienza Lavorativa</h2>
-                    <p class="text-slate-600 dark:text-slate-400">Il mio percorso professionale negli ultimi anni.</p>
-                </div>
-
-                <!-- Timeline -->
-                <div class="relative border-l-2 border-slate-200 dark:border-slate-700 ml-4 md:ml-32 space-y-12">
-                    <!-- Item 1 -->
-                    <div class="relative pl-8">
-                        <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-sky-500 ring-4 ring-white dark:ring-slate-900"></span>
-                        <span class="hidden md:block absolute -left-36 top-1 text-xs font-semibold text-slate-400 text-right w-24">2022 - Presente</span>
-                        <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
-                            <span class="md:hidden text-xs font-semibold text-sky-500 mb-1 block">2022 - Presente</span>
-                            <h3 class="text-lg font-bold">Senior Web Developer</h3>
-                            <p class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-3">Tech Studio S.r.l.</p>
-                            <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-                                Sviluppo di applicazioni web ad alte prestazioni, coordinamento del team di frontend dev e ottimizzazione delle performance utente.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Item 2 -->
-                    <div class="relative pl-8">
-                        <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-indigo-500 ring-4 ring-white dark:ring-slate-900"></span>
-                        <span class="hidden md:block absolute -left-36 top-1 text-xs font-semibold text-slate-400 text-right w-24">2020 - 2022</span>
-                        <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
-                            <span class="md:hidden text-xs font-semibold text-indigo-500 mb-1 block">2020 - 2022</span>
-                            <h3 class="text-lg font-bold">Frontend Developer & UI Specialist</h3>
-                            <p class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-3">Creative Digital Agency</p>
-                            <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-                                Realizzazione di siti ed e-commerce personalizzati su misura del cliente, miglioramento dell'accessibilità e responsive design.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Item 3 -->
-                    <div class="relative pl-8">
-                        <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-slate-400 ring-4 ring-white dark:ring-slate-900"></span>
-                        <span class="hidden md:block absolute -left-36 top-1 text-xs font-semibold text-slate-400 text-right w-24">2019 - 2020</span>
-                        <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
-                            <span class="md:hidden text-xs font-semibold text-slate-400 mb-1 block">2019 - 2020</span>
-                            <h3 class="text-lg font-bold">Junior Web Developer (Freelance)</h3>
-                            <p class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-3">Autonomo</p>
-                            <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-                                Creazione di siti web vetrina per piccole imprese locali, personalizzazione di temi WordPress e supporto tecnico.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="py-20 bg-white dark:bg-slate-800/50 border-t border-slate-200/80 dark:border-slate-800">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-2xl mx-auto mb-16">
-                    <h2 class="text-3xl font-bold tracking-tight mb-4">Mettiti in Contatto</h2>
-                    <p class="text-slate-600 dark:text-slate-400">Hai un progetto in mente o vuoi semplicemente fare due chiacchiere? Scrivimi!</p>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                    <!-- Info Contatto -->
-                    <div class="space-y-8">
-                        <h3 class="text-xl font-bold">Informazioni di Contatto</h3>
-                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
-                            Sono sempre aperto a valutare nuove opportunità lavorative, collaborazioni creative o idee innovative.
-                        </p>
-
-                        <div class="space-y-6">
-                            <div class="flex items-center gap-4">
-                                <div class="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-500 flex items-center justify-center flex-shrink-0">
-                                    <i data-lucide="mail" class="w-6 h-6"></i>
-                                </div>
-                                <div>
-                                    <span class="text-xs text-slate-400 font-medium block">Email</span>
-                                    <a href="mailto:mario.rossi@example.com" class="font-semibold hover:text-sky-500 transition-colors">mario.rossi@example.com</a>
-                                </div>
-                            </div>
-
-                            <div class="flex items-center gap-4">
-                                <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-500 flex items-center justify-center flex-shrink-0">
-                                    <i data-lucide="map-pin" class="w-6 h-6"></i>
-                                </div>
-                                <div>
-                                    <span class="text-xs text-slate-400 font-medium block">Posizione</span>
-                                    <span class="font-semibold">Milano, Italia (Disponibile anche da remoto)</span>
-                                </div>
-                            </div>
-
-                            <div class="flex items-center gap-4">
-                                <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center flex-shrink-0">
-                                    <i data-lucide="phone" class="w-6 h-6"></i>
-                                </div>
-                                <div>
-                                    <span class="text-xs text-slate-400 font-medium block">Telefono</span>
-                                    <span class="font-semibold">+39 333 1234567</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Modulo Contatto -->
-                    <div class="bg-slate-50 dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
-                        <form id="contactForm" class="space-y-6">
-                            <div>
-                                <label for="name" class="block text-sm font-medium mb-2">Nome Completo</label>
-                                <input type="text" id="name" required placeholder="Mario Rossi" class="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-colors">
-                            </div>
-
-                            <div>
-                                <label for="email" class="block text-sm font-medium mb-2">Email</label>
-                                <input type="email" id="email" required placeholder="tuo@email.com" class="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-colors">
-                            </div>
-
-                            <div>
-                                <label for="message" class="block text-sm font-medium mb-2">Messaggio</label>
-                                <textarea id="message" rows="4" required placeholder="Raccontami del tuo progetto..." class="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-colors"></textarea>
-                            </div>
-
-                            <button type="submit" class="w-full py-3.5 px-6 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-semibold shadow-lg shadow-sky-500/25 transition-all duration-200">
-                                Invia Messaggio
-                            </button>
-                        </form>
-
-                        <!-- Box Notifica Invio -->
-                        <div id="formSuccess" class="hidden mt-4 p-4 bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 rounded-xl text-sm font-medium text-center">
-                            ✅ Messaggio inviato con successo! Ti risponderò al più presto.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="py-8 bg-slate-100 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 text-center text-sm text-slate-500 dark:text-slate-400">
-        <div class="max-w-6xl mx-auto px-4">
-            <p>© <span id="year"></span> Mario Rossi. Tutti i diritti riservati.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon">⚡</div>
+            <h3>Energia creativa</h3>
+            <p>
+              Alterno tecnologia, musica e idee personali. Mi piace imparare facendo,
+              sperimentare e cercare una direzione che sia davvero mia.
+            </p>
+          </article>
+          <article class="card">
+            <div class="card-icon">🔍</div>
+            <h3>Osservare le persone</h3>
+            <p>
+              La psicologia mi interessa come strumento per comprendere il comportamento,
+              la comunicazione e i processi mentali, mantenendo una distinzione tra
+              intuizioni personali ed evidenze scientifiche.
+            </p>
+          </article>
         </div>
-    </footer>
+      </div>
+    </section>
 
-    <script>
-        // Inizializza Icone Lucide
-        lucide.createIcons();
+    <section id="interessi">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Le mie aree</h2>
+          <p>Quattro direzioni che si incrociano continuamente nel mio percorso.</p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <div class="card-icon">💻</div>
+            <h3>Tech & sviluppo</h3>
+            <p>
+              Informatica, hardware, programmazione e sperimentazione con sistemi locali.
+              Mi interessa capire come rendere un progetto più efficiente, concreto e utile.
+            </p>
+            <div class="tag-list">
+              <span class="tag">Three.js</span><span class="tag">Potree</span>
+              <span class="tag">Local AI</span><span class="tag">Hardware</span>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card-icon">🧬</div>
+            <h3>Psicologia</h3>
+            <p>
+              Voglio approfondire la mente umana, la diagnosi, la ricerca e gli esperimenti.
+              Il mio obiettivo è sviluppare intuizioni solide, verificabili e responsabili.
+            </p>
+            <div class="tag-list">
+              <span class="tag">Cognizione</span><span class="tag">Comunicazione</span>
+              <span class="tag">Ricerca</span><span class="tag">Comportamento</span>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card-icon">🎸</div>
+            <h3>Musica</h3>
+            <p>
+              Chitarra elettrica, metal, rock, tecnica solistica e nuovi territori musicali.
+              Sto esplorando anche il pianoforte jazz come nuova competenza da costruire.
+            </p>
+            <div class="tag-list">
+              <span class="tag">Guitar</span><span class="tag">Metal</span>
+              <span class="tag">Jazz piano</span><span class="tag">Recording</span>
+            </div>
+          </article>
+          <article class="card full">
+            <div class="quote">
+              “La curiosità è il mio modo di entrare nelle cose: prima faccio domande,
+              poi provo a costruire una spiegazione.”
+              <small>— Una possibile sintesi del mio approccio</small>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
 
-        // Anno Corrente nel Footer
-        document.getElementById('year').textContent = new Date().getFullYear();
+    <section id="progetti">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Progetti & laboratorio</h2>
+          <p>Idee che sto esplorando o che rappresentano il tipo di lavoro che voglio imparare a fare.</p>
+        </div>
+        <div class="grid">
+          <article class="card wide">
+            <div class="card-icon">🌌</div>
+            <h3>Nuvola — Point Cloud Viewer</h3>
+            <p>
+              Un progetto web per visualizzare nuvole di punti 3D con Three.js e Potree.
+              Il focus è la gestione delle grandi quantità di dati, lo streaming,
+              l'ottimizzazione del rendering e l'esperienza di navigazione.
+            </p>
+            <div class="tag-list">
+              <span class="tag">3D Web</span><span class="tag">Performance</span>
+              <span class="tag">Octree</span><span class="tag">Rendering</span>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card-icon">🤖</div>
+            <h3>Agata</h3>
+            <p>
+              Un assistente locale basato su Ollama e modelli linguistici,
+              con l'idea di esplorare voce, webcam, personalità e interazione uomo-macchina.
+            </p>
+          </article>
+          <article class="card">
+            <div class="card-icon">🎛️</div>
+            <h3>Sound & strumenti</h3>
+            <p>
+              Esplorazione di chitarre, pickup, amplificazione e registrazione.
+              La musica è anche un modo per allenare tecnica, pazienza e creatività.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-        // Toggle Dark/Light Mode
-        const themeToggleBtn = document.getElementById('themeToggle');
-        const sunIcon = document.getElementById('sunIcon');
-        const moonIcon = document.getElementById('moonIcon');
+    <section id="direzione">
+      <div class="container">
+        <div class="section-heading">
+          <h2>La direzione</h2>
+          <p>Non una destinazione immutabile, ma un insieme di domande da approfondire.</p>
+        </div>
+        <div class="card full">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-year">ORA</div>
+              <div>
+                <h3>Costruire fondamenta</h3>
+                <p class="muted">Concludere il percorso scolastico, migliorare il metodo di studio e sviluppare competenze tecniche e teoriche.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">PROSSIMO</div>
+              <div>
+                <h3>Entrare nel mondo universitario</h3>
+                <p class="muted">Approfondire la psicologia e valutare con consapevolezza il rapporto tra pratica clinica, diagnosi e ricerca scientifica.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">NEL TEMPO</div>
+              <div>
+                <h3>Unire discipline diverse</h3>
+                <p class="muted">Creare connessioni tra mente, tecnologia, sperimentazione e creatività, senza smettere di mettere alla prova le proprie idee.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        // Check Preferenza Salvata o di Sistema
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-            sunIcon.classList.remove('hidden');
-            moonIcon.classList.add('hidden');
-        } else {
-            document.documentElement.classList.remove('dark');
-            sunIcon.classList.add('hidden');
-            moonIcon.classList.remove('hidden');
-        }
+    <section>
+      <div class="container">
+        <div class="terminal">
+          <div class="terminal-bar"><span></span><span></span><span></span></div>
+          <pre><span class="prompt">pera@personal-system:~$</span> whoami
 
-        themeToggleBtn.addEventListener('click', function() {
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark');
-                localStorage.setItem('color-theme', 'light');
-                sunIcon.classList.add('hidden');
-                moonIcon.classList.remove('hidden');
-            } else {
-                document.documentElement.classList.add('dark');
-                localStorage.setItem('color-theme', 'dark');
-                sunIcon.classList.remove('hidden');
-                moonIcon.classList.add('hidden');
-            }
-        });
+Pera
+status: learning
+primary_mode: curious
+current_build: unfinished
+main_quest: understand_more_than_yesterday
 
-        // Toggle Menu Mobile
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
+<span class="prompt">pera@personal-system:~$</span> echo "keep building"
 
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+keep building.</pre>
+        </div>
+      </div>
+    </section>
+  </main>
 
-        // Chiudi menu mobile al click sui link
-        document.querySelectorAll('#mobileMenu a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
-
-        // Simulazione Invio Form
-        const contactForm = document.getElementById('contactForm');
-        const formSuccess = document.getElementById('formSuccess');
-
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            formSuccess.classList.remove('hidden');
-            contactForm.reset();
-            setTimeout(() => {
-                formSuccess.classList.add('hidden');
-            }, 5000);
-        });
-    </script>
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>© 2026 Pera.exe</span>
+      <span class="mono">made with curiosity // still in beta</span>
+    </div>
+  </footer>
 </body>
 </html>
